@@ -15,6 +15,8 @@ public class TodoListServiceImpl implements TodoListService {
 
     @Override
     public Flux<TodoListDomain> findAll() {
-        return repository.findAll();
+        Flux<TodoListDomain> result = repository.findAll();
+
+        return result;
     }
 }

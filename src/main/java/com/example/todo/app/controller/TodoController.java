@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
@@ -17,6 +19,10 @@ public class TodoController {
 
     @GetMapping("/list")
     public Flux<TodoListDomain> getTodoList() {
-        return service.findAll();
+        return service.findAll()
+                .map(data -> {
+                    data.setModDtime(LocalDateTime.now());
+                    return data;
+                });
     }
 }
