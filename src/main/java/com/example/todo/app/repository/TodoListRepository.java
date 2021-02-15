@@ -8,6 +8,4 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface TodoListRepository extends ReactiveCrudRepository<TodoListDomain, Integer> {
 
-    Flux<TodoListDomain> findAll();
-
 }

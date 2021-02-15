@@ -30,15 +30,18 @@ import java.util.Objects;
 @EnableWebFlux
 public class WebFluxGlobalConfig implements WebFluxConfigurer {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-
-        registry.addMapping("/**")
-                .allowedOrigins("**")
-                .allowedMethods("*")
-                .allowCredentials(true);
-        // Add more mappings...
-    }
+    // security의 corsFilter를 기본으로 사용. security를 사용하지 않을 경우 세팅.
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//
+//        registry.addMapping("/**")
+//                .allowedOrigins("*")
+//                .allowedMethods("*")
+//                .allowedHeaders("*")
+//                //.allowCredentials(true)
+//        ;
+//        // Add more mappings...
+//    }
 
 //    @Override
 //    public void addFormatters(FormatterRegistry registry) {

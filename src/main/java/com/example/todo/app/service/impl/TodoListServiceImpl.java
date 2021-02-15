@@ -6,6 +6,7 @@ import com.example.todo.app.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class TodoListServiceImpl implements TodoListService {
@@ -18,5 +19,10 @@ public class TodoListServiceImpl implements TodoListService {
         Flux<TodoListDomain> result = repository.findAll();
 
         return result;
+    }
+
+    @Override
+    public Mono<TodoListDomain> save(TodoListDomain todo) {
+        return repository.save(todo);
     }
 }
