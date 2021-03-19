@@ -1,32 +1,35 @@
 package com.example.todo.app.controller;
 
-import com.example.todo.app.domain.TodoListDomain;
-import com.example.todo.app.service.TodoListService;
+import com.example.todo.app.dto.request.TodoSaveReq;
+import com.example.todo.app.dto.response.TodoInfoRes;
+import com.example.todo.app.dto.response.TodoListRes;
+import com.example.todo.app.service.TodoService;
+import com.example.todo.app.table.TdComInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
-
     @Autowired
-    TodoListService service;
+    TodoService todoService;
 
     @GetMapping("/list")
-    public Flux<TodoListDomain> getTodoList() {
-        return service.findAll()
-                .map(data -> {
-                    data.setModDtime(LocalDateTime.now());
-                    return data;
-                });
+    public Flux<TodoListRes> getTodoList() {
+        return todoService.getTodoList();
+    }
+
+    @GetMapping("/client/list")
+    public Flux<TodoInfoRes> getTodoClientList() {
+        return todoService.getTodoListFromDataClient();
     }
 
     @PostMapping("/save")
-    public Mono<TodoListDomain> saveTodo(@RequestBody TodoListDomain todo) {
-        return service.save(todo);
+    public Mono<TdComInfo> saveTodo(@RequestBody TodoSaveReq req) {
+        return todoService.saveTodo(req);
     }
 }

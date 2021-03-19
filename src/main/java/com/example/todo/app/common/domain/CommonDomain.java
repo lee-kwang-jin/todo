@@ -6,10 +6,8 @@ import java.time.LocalDateTime;
 
 @Data
 public class CommonDomain {
-
     private String regId;
-    private LocalDateTime regDtime;
+    private LocalDateTime regDtm;
     private String modId;
-    private LocalDateTime modDtime;
-
+    private LocalDateTime modDtm;
 }
