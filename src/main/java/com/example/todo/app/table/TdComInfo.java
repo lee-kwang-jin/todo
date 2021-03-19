@@ -16,7 +16,4 @@ public class TdComInfo extends CommonDomain {
     private Integer upTdComId;
     private Integer tdId;
     private String tdComCont;
-
-    @Transient
-    private String test;
 }

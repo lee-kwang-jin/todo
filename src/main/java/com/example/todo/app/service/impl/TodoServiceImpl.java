@@ -118,4 +118,20 @@ public class TodoServiceImpl implements TodoService {
                 .log()
                 .flatMap(data -> Mono.just(new TdComInfo()));
     }
+
+    @Override
+    public Flux<TdInfo> getTodoListForEntity() {
+        return todoInfoRepository.findAll()
+                .flatMap(todo -> Mono.just(todo)
+                           .zipWith(todoCommentInfoRepository.findByTdIdAndUpTdComId(todo.getTdId(), 0).collectList(),
+                                   (t1, t2) -> new TdInfo(t1, t2)));
+    }
+
+    @Override
+    public Flux<TdInfo> getTodoListForEntityByMap() {
+        return todoInfoRepository.findAll()
+                .flatMap(todo -> Mono.just(todo)
+                        .zipWith(todoCommentInfoRepository.findByTdIdAndUpTdComId(todo.getTdId(), 0).collectList())
+                        .map(tuple -> tuple.getT1().withTdComInfoList(tuple.getT2())));
+    }
 }

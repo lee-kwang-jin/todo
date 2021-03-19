@@ -5,6 +5,7 @@ import com.example.todo.app.dto.response.TodoInfoRes;
 import com.example.todo.app.dto.response.TodoListRes;
 import com.example.todo.app.service.TodoService;
 import com.example.todo.app.table.TdComInfo;
+import com.example.todo.app.table.TdInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -26,6 +27,16 @@ public class TodoController {
     @GetMapping("/client/list")
     public Flux<TodoInfoRes> getTodoClientList() {
         return todoService.getTodoListFromDataClient();
+    }
+
+    @GetMapping("/entity/list")
+    public Flux<TdInfo> getTodoListForEntity() {
+        return todoService.getTodoListForEntity();
+    }
+
+    @GetMapping("/entity/map/list")
+    public Flux<TdInfo> getTodoListForEntityByMap() {
+        return todoService.getTodoListForEntityByMap();
     }
 
     @PostMapping("/save")
