@@ -45,7 +45,9 @@ public class CustomResponseBodyHandler extends ResponseBodyResultHandler {
         } else {
             Mono<Test> resultBody = Flux.from((Flux<Object>) result.getReturnValue())
                     .collectList()
-                    .map(d -> new Test(d, "true"));
+                    .log()
+                    .map(d -> new Test(d, "true"))
+                    .log();
 
             return writeBody(resultBody, result.getReturnTypeSource(), exchange);
         }

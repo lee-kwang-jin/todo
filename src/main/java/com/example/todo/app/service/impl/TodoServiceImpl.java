@@ -4,6 +4,7 @@ import com.example.todo.app.dto.request.TodoSaveReq;
 import com.example.todo.app.dto.response.TodoCommentRes;
 import com.example.todo.app.dto.response.TodoInfoRes;
 import com.example.todo.app.dto.response.TodoListRes;
+import com.example.todo.app.projection.TdInfoOpenProjection;
 import com.example.todo.app.repository.TodoCommentInfoRepository;
 import com.example.todo.app.repository.TodoInfoRepository;
 import com.example.todo.app.service.TodoService;
@@ -14,14 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.reactive.TransactionalOperator;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.function.Function;
 
 @Service
@@ -133,5 +131,10 @@ public class TodoServiceImpl implements TodoService {
                 .flatMap(todo -> Mono.just(todo)
                         .zipWith(todoCommentInfoRepository.findByTdIdAndUpTdComId(todo.getTdId(), 0).collectList())
                         .map(tuple -> tuple.getT1().withTdComInfoList(tuple.getT2())));
+    }
+
+    @Override
+    public Flux<TdInfoOpenProjection> getTodoListWithProjection() {
+        return todoInfoRepository.findAllBy();
     }
 }
