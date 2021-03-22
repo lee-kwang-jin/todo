@@ -3,6 +3,8 @@ package com.example.todo.app.controller;
 import com.example.todo.app.dto.request.TodoSaveReq;
 import com.example.todo.app.dto.response.TodoInfoRes;
 import com.example.todo.app.dto.response.TodoListRes;
+import com.example.todo.app.dto.response.TodoProjectionDto;
+import com.example.todo.app.projection.TdInfoCloseProjection;
 import com.example.todo.app.projection.TdInfoOpenProjection;
 import com.example.todo.app.service.TodoService;
 import com.example.todo.app.table.TdComInfo;
@@ -38,9 +40,44 @@ public class TodoController {
         return todoService.getTodoListForEntityByMap();
     }
 
-    @GetMapping("/projection/list")
-    public Flux<TdInfoOpenProjection> getTodoListWithProjection() {
-        return todoService.getTodoListWithProjection();
+    @GetMapping("/projection/open/list")
+    public Flux<TdInfoOpenProjection> findTodoListWithProjection() {
+        return todoService.findTodoListWithProjection();
+    }
+
+    @GetMapping("/projection/open/{tdId}")
+    public Flux<TdInfoOpenProjection> findTodoListByTdIdWithProjection(@PathVariable Integer tdId) {
+        return todoService.findTodoListByTdIdWithOpenProjection(tdId);
+    }
+
+    @GetMapping("/projection/close/list")
+    public Flux<TdInfoCloseProjection> readTodoListWithProjection() {
+        return todoService.readTodoListWithCloseProjection();
+    }
+
+    @GetMapping("/projection/close/{tdId}")
+    public Flux<TdInfoCloseProjection> readTodoListByTdIdWithProjection(@PathVariable Integer tdId) {
+        return todoService.readTodoListByTdIdWithCloseProjection(tdId);
+    }
+
+    @GetMapping("/projection/dto/list")
+    public Flux<TodoProjectionDto> getTodoListWithDtoProjection() {
+        return todoService.getTodoListWithDtoProjection();
+    }
+
+    @GetMapping("/projection/dto/{tdCont}")
+    public Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(@PathVariable String tdCont) {
+        return todoService.getTodoListByTdContWithDtoProjection(tdCont);
+    }
+
+    @GetMapping("/projection/dynamic/list")
+    public Flux<TodoProjectionDto> searchTodoListWithDtoProjection() {
+        return todoService.searchTodoListWithDtoProjection();
+    }
+
+    @GetMapping("/projection/dynamic/{tdId}")
+    public Flux<TodoProjectionDto> searchTodoListWithDtoProjection(@PathVariable Integer tdId) {
+        return todoService.searchTodoListByTdIdWithDtoProjection(tdId);
     }
 
     @PostMapping("/save")

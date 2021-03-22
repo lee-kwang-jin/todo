@@ -4,6 +4,8 @@ import com.example.todo.app.dto.request.TodoSaveReq;
 import com.example.todo.app.dto.response.TodoCommentRes;
 import com.example.todo.app.dto.response.TodoInfoRes;
 import com.example.todo.app.dto.response.TodoListRes;
+import com.example.todo.app.dto.response.TodoProjectionDto;
+import com.example.todo.app.projection.TdInfoCloseProjection;
 import com.example.todo.app.projection.TdInfoOpenProjection;
 import com.example.todo.app.repository.TodoCommentInfoRepository;
 import com.example.todo.app.repository.TodoInfoRepository;
@@ -134,7 +136,44 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Flux<TdInfoOpenProjection> getTodoListWithProjection() {
+    public Flux<TdInfoOpenProjection> findTodoListWithProjection() {
         return todoInfoRepository.findAllBy();
     }
+
+    @Override
+    public Flux<TdInfoOpenProjection> findTodoListByTdIdWithOpenProjection(Integer tdId) {
+        return todoInfoRepository.findAllByTdId(tdId);
+    }
+
+    @Override
+    public Flux<TdInfoCloseProjection> readTodoListWithCloseProjection() {
+        return todoInfoRepository.readAllBy();
+    }
+
+    @Override
+    public Flux<TdInfoCloseProjection> readTodoListByTdIdWithCloseProjection(Integer tdId) {
+        return todoInfoRepository.readAllByTdId(tdId);
+    }
+
+    @Override
+    public Flux<TodoProjectionDto> getTodoListWithDtoProjection() {
+        return todoInfoRepository.getAllBy();
+    }
+
+    @Override
+    public Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(String tdCont) {
+        return todoInfoRepository.getAllByTdCont(tdCont);
+    }
+
+    @Override
+    public Flux<TodoProjectionDto> searchTodoListWithDtoProjection() {
+        return todoInfoRepository.searchAllBy(TodoProjectionDto.class);
+    }
+
+    @Override
+    public Flux<TodoProjectionDto> searchTodoListByTdIdWithDtoProjection(Integer tdId) {
+        return todoInfoRepository.searchAllByTdId(tdId, TodoProjectionDto.class);
+    }
+
+
 }
