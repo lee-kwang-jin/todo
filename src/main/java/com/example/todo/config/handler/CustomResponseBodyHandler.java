@@ -39,8 +39,9 @@ public class CustomResponseBodyHandler extends ResponseBodyResultHandler {
         if( result.getReturnValue() instanceof Mono ) {
             Mono<Test> resultBody = ((Mono<Object>) result.getReturnValue()).log().map(
                     d -> new Test(d, "true"))
+                    .log()
                     .defaultIfEmpty(new Test("test", "true"))
-                    .doOnSubscribe(s -> log.debug("sub :: ", s));
+                    .log();
             return writeBody(resultBody, result.getReturnTypeSource(), exchange);
         } else {
             Mono<Test> resultBody = Flux.from((Flux<Object>) result.getReturnValue())

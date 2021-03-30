@@ -22,6 +22,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import javax.sql.DataSource;
 import java.util.function.Function;
 
 @Service
@@ -36,7 +37,8 @@ public class TodoServiceImpl implements TodoService {
     R2dbcEntityTemplate r2dbcEntityTemplate;
     @Autowired
     TransactionalOperator transactionalOperator;
-
+    @Autowired
+    DataSource dataSource;
 
     public Function<TodoCommentRes, Mono<TodoCommentRes>> getComment() {
         return tdComInfo -> Mono.zip(

@@ -53,10 +53,10 @@ public class CustomWebFilter implements WebFilter {
         ServerHttpResponse response = exchange.getResponse();
         ServerHttpRequest request = exchange.getRequest();
 
-        request.getPath();
-        if(!request.getPath().value().contains("todo")) {
-            response.setStatusCode(HttpStatus.BAD_REQUEST);
-        }
+//        request.getPath();
+//        if(!request.getPath().value().contains("todo")) {
+//            response.setStatusCode(HttpStatus.BAD_REQUEST);
+//        }
 
         // requestBody를 어떻게 가져와서 사용이 가능한가!?
 

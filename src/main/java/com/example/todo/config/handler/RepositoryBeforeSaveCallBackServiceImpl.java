@@ -8,6 +8,8 @@ import org.reactivestreams.Subscriber;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.auditing.ReactiveIsNewAwareAuditingHandler;
 import org.springframework.data.r2dbc.mapping.OutboundRow;
@@ -23,37 +25,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class RepositoryBeforeSaveCallBackServiceImpl<T> implements RepositoryBeforeSaveCallBackService<T> {
 
     @Override
     public Publisher<T> onBeforeConvert(T entity, SqlIdentifier table) {
-
-//        Class currentClass = entity.getClass();
-//
-//        Class superClass = currentClass.getSuperclass();
-//
-//        if(Objects.nonNull(superClass) && CommonDomain.class.equals(superClass)) {
-//            Field[] fields = superClass.getDeclaredFields();
-//
-//            try {
-//                for(Field field : fields) {
-//                    field.setAccessible(true);
-//
-//                    if(field.getType().equals(DomainType.TIME.getType())) {
-//                        field.set(entity, LocalDateTime.now());
-//                        continue;
-//                    }
-//
-//                    // 차후 session or authenticate의 principle로 변경 예정.
-//                    if(field.getType().equals(DomainType.ID.getType())) {
-//                        field.set(entity, "system");
-//                        continue;
-//                    }
-//                }
-//            } catch (IllegalAccessException e) {
-//                e.printStackTrace();
-//            }
-//        }
 
         Mono<T> mono = Mono.just(entity)
                 .map(s -> {
@@ -105,8 +81,9 @@ public class RepositoryBeforeSaveCallBackServiceImpl<T> implements RepositoryBef
     }
 
     @Override
-    public int getOrder() {
-        return 1;
+    public Publisher<T> onBeforeSave(T entity, OutboundRow row, SqlIdentifier table) {
+
+        return Mono.just(entity);
     }
 
 //    @Override
