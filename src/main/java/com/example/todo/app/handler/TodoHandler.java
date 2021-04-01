@@ -14,7 +14,7 @@ public class TodoHandler {
     @Autowired
     TodoInfoRepository repository;
 
-    public Mono<ServerResponse> getTodoList(ServerRequest request) {
-        return ServerResponse.ok().body(repository.findAllBy(), TdInfoOpenProjection.class);
-    }
+//    public Mono<ServerResponse> getTodoList(ServerRequest request) {
+//        return ServerResponse.ok().body(repository.findAllBy(), TdInfoOpenProjection.class);
+//    }
 }

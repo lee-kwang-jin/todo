@@ -137,35 +137,35 @@ public class TodoServiceImpl implements TodoService {
                         .map(tuple -> tuple.getT1().withTdComInfoList(tuple.getT2())));
     }
 
-    @Override
-    public Flux<TdInfoOpenProjection> findTodoListWithProjection() {
-        return todoInfoRepository.findAllBy();
-    }
-
-    @Override
-    public Flux<TdInfoOpenProjection> findTodoListByTdIdWithOpenProjection(Integer tdId) {
-        return todoInfoRepository.findAllByTdId(tdId);
-    }
-
-    @Override
-    public Flux<TdInfoCloseProjection> readTodoListWithCloseProjection() {
-        return todoInfoRepository.readAllBy();
-    }
-
-    @Override
-    public Flux<TdInfoCloseProjection> readTodoListByTdIdWithCloseProjection(Integer tdId) {
-        return todoInfoRepository.readAllByTdId(tdId);
-    }
-
-    @Override
-    public Flux<TodoProjectionDto> getTodoListWithDtoProjection() {
-        return todoInfoRepository.getAllBy();
-    }
-
-    @Override
-    public Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(String tdCont) {
-        return todoInfoRepository.getAllByTdCont(tdCont);
-    }
+//    @Override
+//    public Flux<TdInfoOpenProjection> findTodoListWithProjection() {
+//        return todoInfoRepository.findAllBy();
+//    }
+//
+//    @Override
+//    public Flux<TdInfoOpenProjection> findTodoListByTdIdWithOpenProjection(Integer tdId) {
+//        return todoInfoRepository.findAllByTdId(tdId);
+//    }
+//
+//    @Override
+//    public Flux<TdInfoCloseProjection> readTodoListWithCloseProjection() {
+//        return todoInfoRepository.readAllBy();
+//    }
+//
+//    @Override
+//    public Flux<TdInfoCloseProjection> readTodoListByTdIdWithCloseProjection(Integer tdId) {
+//        return todoInfoRepository.readAllByTdId(tdId);
+//    }
+//
+//    @Override
+//    public Flux<TodoProjectionDto> getTodoListWithDtoProjection() {
+//        return todoInfoRepository.getAllBy();
+//    }
+//
+//    @Override
+//    public Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(String tdCont) {
+//        return todoInfoRepository.getAllByTdCont(tdCont);
+//    }
 
     @Override
     public Flux<TodoProjectionDto> searchTodoListWithDtoProjection() {

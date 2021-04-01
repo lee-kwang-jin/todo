@@ -13,15 +13,15 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration
 public class RouteConfig {
 
-    @Bean
-    public RouterFunction<ServerResponse> todoRoute(TodoHandler todoHandler) {
-        return RouterFunctions.route()
-                .GET("/route/todo/list", todoHandler::getTodoList)
-                .build();
-    }
-
-    public RouterFunction<ServerResponse> orderRoute(OrderHandler orderHandler) {
-        return RouterFunctions.route()
-                .build();
-    }
+//    @Bean
+//    public RouterFunction<ServerResponse> todoRoute(TodoHandler todoHandler) {
+//        return RouterFunctions.route()
+////                .GET("/route/todo/list", todoHandler::getTodoList)
+//                .build();
+//    }
+//
+//    public RouterFunction<ServerResponse> orderRoute(OrderHandler orderHandler) {
+//        return RouterFunctions.route()
+//                .build();
+//    }
 }

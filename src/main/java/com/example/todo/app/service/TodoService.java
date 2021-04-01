@@ -22,17 +22,17 @@ public interface TodoService {
 
     Mono<TdComInfo> saveTodo(TodoSaveReq req);
 
-    Flux<TdInfoOpenProjection> findTodoListWithProjection();
-
-    Flux<TdInfoOpenProjection> findTodoListByTdIdWithOpenProjection(Integer tdId);
-
-    Flux<TdInfoCloseProjection> readTodoListWithCloseProjection();
-
-    Flux<TdInfoCloseProjection> readTodoListByTdIdWithCloseProjection(Integer tdId);
-
-    Flux<TodoProjectionDto> getTodoListWithDtoProjection();
-
-    Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(String tdCont);
+//    Flux<TdInfoOpenProjection> findTodoListWithProjection();
+//
+//    Flux<TdInfoOpenProjection> findTodoListByTdIdWithOpenProjection(Integer tdId);
+//
+//    Flux<TdInfoCloseProjection> readTodoListWithCloseProjection();
+//
+//    Flux<TdInfoCloseProjection> readTodoListByTdIdWithCloseProjection(Integer tdId);
+//
+//    Flux<TodoProjectionDto> getTodoListWithDtoProjection();
+//
+//    Flux<TodoProjectionDto> getTodoListByTdContWithDtoProjection(String tdCont);
 
     Flux<TodoProjectionDto> searchTodoListWithDtoProjection();
 
