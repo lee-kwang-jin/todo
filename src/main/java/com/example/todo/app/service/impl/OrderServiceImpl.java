@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Transient;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -93,8 +94,8 @@ public class OrderServiceImpl implements OrderService {
                 ;
     }
 
+    @Override
     public Flux<OrderFavorInfo> getOrderByFavor() {
-
         return databaseClient.sql(
                 "select *\n" +
                 " from om_od_dtl as a\n" +
